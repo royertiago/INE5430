@@ -7,6 +7,15 @@
 \usetikzlibrary{positioning}
 \usepackage{booktabs}
 
+\usepackage{amsthm}
+\newtheorem{question}{Questão}
+
+\newcommand{\Mg}{\mathrm{Mg}}
+\newcommand{\Vr}{\mathrm{Vr}}
+\newcommand{\Hp}{\mathrm{Hp}}
+\newcommand{\Zb}{\mathrm{Zb}}
+\newcommand{\Tp}{\mathrm{Tp}}
+
 \begin{document}
 
 \title{
@@ -21,7 +30,7 @@
 
 \section{Introdução}
 
-O objetivo do trabalho é estudar o avistamento de zumbis no campus da UFSC.
+O objetivo do trabalho é estudar o avistamento de zumbis no câmpus da UFSC.
 Nos foi dado a rede bayesiana apresentada na figura \ref{rede_bayesiana}.
 
 \begin{figure}[h]
@@ -35,11 +44,11 @@ Nos foi dado a rede bayesiana apresentada na figura \ref{rede_bayesiana}.
         \begin{tikzpicture}
             \begin{scope}[every node/.style={circle, draw, minimum size = 1cm}]
                 % Minimum size é para que todos os nós possuam o mesmo tamanho.
-                \node (Hp) at (0, 0) {Hp};
-                \node (Mg) at (1, 1.5) {Mg};
-                \node (Zb) at (2, 0) {Zb};
-                \node (Vr) at (3, 1.5) {Vr};
-                \node (Tp) at (4, 0) {Tp};
+                \node (Hp) at (0, 0) {$\Hp$};
+                \node (Mg) at (1, 1.5) {$\Mg$};
+                \node (Zb) at (2, 0) {$\Zb$};
+                \node (Vr) at (3, 1.5) {$\Vr$};
+                \node (Tp) at (4, 0) {$\Tp$};
             \end{scope}
 
             \begin{scope}[>=latex, thick]
@@ -52,43 +61,43 @@ Nos foi dado a rede bayesiana apresentada na figura \ref{rede_bayesiana}.
             \begin{scope}[every node/.style={node distance = 1mm}]
                 \node[above left = of Mg] {
                     \begin{tabular}{c c} \toprule
-                        Mg = S & Mg = N \\ \midrule
+                        $\Mg$ = S & $\Mg$ = N \\ \midrule
                         0.1 & 0.9 \\ \bottomrule
                     \end{tabular}
                 };
 
                 \node[above right = of Vr] {
                     \begin{tabular}{c c} \toprule
-                        Vr = S & Vr = N \\ \midrule
+                        $\Vr$ = S & $\Vr$ = N \\ \midrule
                         0.2 & 0.8 \\ \bottomrule
                     \end{tabular}
                 };
 
                 \node[left = of Hp] {
                     \begin{tabular}{c c c} \toprule
-                        & Hp = S & Hp = N \\ \cmidrule{2-3}
-                        Mg = S & 0.8 & 0.2 \\
-                        Mg = N & 0.7 & 0.3 \\
+                        & $\Hp$ = S & $\Hp$ = N \\ \cmidrule{2-3}
+                        $\Mg$ = S & 0.8 & 0.2 \\
+                        $\Mg$ = N & 0.7 & 0.3 \\
                         \bottomrule
                     \end{tabular}
                 };
 
                 \node[right = of Tp] {
                     \begin{tabular}{c c c} \toprule
-                        & Tp = S & Tp = N \\ \cmidrule{2-3}
-                        Vr = S & 0.3 & 0.7 \\
-                        Vr = N & 0.1 & 0.9 \\
+                        & $\Tp$ = S & $\Tp$ = N \\ \cmidrule{2-3}
+                        $\Vr$ = S & 0.3 & 0.7 \\
+                        $\Vr$ = N & 0.1 & 0.9 \\
                         \bottomrule
                     \end{tabular}
                 };
 
                 \node[below = 5mm of Zb] {
                     \begin{tabular}{c c c c} \toprule
-                        & & Zb = S & Zb = N \\ \cmidrule{3-4}
-                        Mg = S & Vr = S & 0.6 & 0.4 \\
-                        Mg = S & Vr = N & 0.5 & 0.5 \\
-                        Mg = N & Vr = S & 0.4 & 0.6 \\
-                        Mg = N & Vr = N & 0.01 & 0.99 \\
+                        & & $\Zb$ = S & $\Zb$ = N \\ \cmidrule{3-4}
+                        $\Mg$ = S & $\Vr$ = S & 0.6 & 0.4 \\
+                        $\Mg$ = S & $\Vr$ = N & 0.5 & 0.5 \\
+                        $\Mg$ = N & $\Vr$ = S & 0.4 & 0.6 \\
+                        $\Mg$ = N & $\Vr$ = N & 0.01 & 0.99 \\
                         \bottomrule
                     \end{tabular}
                 };
@@ -100,5 +109,29 @@ Nos foi dado a rede bayesiana apresentada na figura \ref{rede_bayesiana}.
     }
     \label{rede_bayesiana}
 \end{figure}
+
+\begin{itemize}
+    \item $\Mg$ representa o evento de um feitiço mágico ser lançado;
+    \item $\Vr$ representa a existência de um surto viral de H1Z1;
+    \item $\Hp$ é o evento de avistar um Hipogrifo no câmpus;
+    \item $\Zb$ representa o avistamento de zumbis; e
+    \item $\Tp$ é a aparição de viajantes no tempo.
+\end{itemize}
+
+\section{Exercícios}
+
+\begin{question}
+    Qual a probabilidade de nenhum zumbi ser avistado,
+    dado que não houve surto viral nem lançamento de feitiços?
+\end{question}
+
+Basta olhar na tabela logo abaixo de $\Zb$.
+A quarta linha diz que,
+sob a hipótese ``$\Mg$ = N'' e ``$\Vr$ = N'',
+a chance de não avistarmos zumbis é de 99\%.
+
+\begin{equation*}
+    P(\Zb = N \mid \Mg = N \wedge \Vr = N) = 0.99
+\end{equation*}
 
 \end{document}
