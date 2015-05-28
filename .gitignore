@@ -1,0 +1,24 @@
+# LaTeX temporaries
+*.aux
+*.bbl
+*.blg
+*.dep.mk
+*.fdb_latexmk
+*.fls
+*.las
+*.lof
+*.log
+*.lot
+*.lsb
+*.nav
+*.out
+*.snm
+*.toc
+*.vrb
+
+# Binary output
+*.dvi
+*.pdf
+
+# Vim temporaries
+.*.swp
