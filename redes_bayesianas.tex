@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{tikz}
+
+\begin{document}
+
+\title{
+    INE5430 --- Inteligência Artificial \\
+    Raciocínio Probabilístico --- Redes Bayesianas
+}
+\author{
+    Tiago Royer - 12100776
+}
+\date{28 de Maio de 2015}
+\maketitle
+
+\section{Introdução}
+
+O objetivo do trabalho é estudar o avistamento de zumbis no campus da UFSC.
+Nos foi dado a rede bayesiana apresentada na figura \ref{rede_bayesiana}.
+
+\begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+        \begin{scope}[every node/.style={circle, draw, minimum size = 1cm}]
+            % Minimum size é para que todos os nós possuam o mesmo tamanho.
+            \node (Hp) at (0, 0) {Hp};
+            \node (Mg) at (1, 1.5) {Mg};
+            \node (Zb) at (2, 0) {Zb};
+            \node (Vr) at (3, 1.5) {Vr};
+            \node (Tp) at (4, 0) {Tp};
+        \end{scope}
+
+        \begin{scope}[>=latex, thick]
+            \draw[->] (Mg) -- (Hp);
+            \draw[->] (Mg) -- (Zb);
+            \draw[->] (Vr) -- (Zb);
+            \draw[->] (Vr) -- (Tp);
+        \end{scope}
+    \end{tikzpicture}
+    \caption{
+        Rede bayesiana usada como base no trabalho.
+    }
+    \label{rede_bayesiana}
+\end{figure}
+
+\end{document}
