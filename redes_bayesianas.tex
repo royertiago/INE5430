@@ -113,7 +113,7 @@ Nos foi dado a rede bayesiana apresentada na figura \ref{rede_bayesiana}.
 \begin{itemize}
     \item $\Mg$ representa o evento de um feitiço mágico ser lançado;
     \item $\Vr$ representa a existência de um surto viral de H1Z1;
-    \item $\Hp$ é o evento de avistar um Hipogrifo no câmpus;
+    \item $\Hp$ é o evento de avistar um hipogrifo no câmpus;
     \item $\Zb$ representa o avistamento de zumbis; e
     \item $\Tp$ é a aparição de viajantes no tempo.
 \end{itemize}
@@ -133,5 +133,100 @@ a chance de não avistarmos zumbis é de 99\%.
 \begin{equation*}
     P(\Zb = N \mid \Mg = N \wedge \Vr = N) = 0.99
 \end{equation*}
+
+Esta era a única questão ``trivial'' da lista,
+todas as demais preciam ser resolvidas
+usando probabilidade condicional ou o teorema de Bayes.
+
+\begin{question}
+    Qual a probabilidade de os cinco eventos ocorrerem simultaneamente?
+\end{question}
+
+\begin{align*}
+    P (&\Mg = S \wedge \Hp = S \wedge \Zb = S \wedge \Vr = S \wedge \Tp = S) = \\
+        = & P(\Mg = S) * P(\Hp = S \mid \Mg = S) * {}\\
+          & P(\Zb = S \mid \Mg = S \wedge \Vr = S) * {}\\
+          & P(\Vr = S) * P(\Tp = S \mid \Vr = S) \\
+        = & 0.1 * 0.8 * 0.6 * 0.8 * 0.3\\
+        = & 0.01152.
+\end{align*}
+
+\begin{question}
+    Qual a probabilidade de se ver um zumbi?
+\end{question}
+
+\begin{align*}
+    P (\Zb = S) =
+        & P(\Zb = S \mid \Mg = S \wedge \Vr = S ) * P(\Mg = S) * P(\Vr = S) + {} \\
+        & P(\Zb = S \mid \Mg = S \wedge \Vr = N ) * P(\Mg = S) * P(\Vr = N) + {} \\
+        & P(\Zb = S \mid \Mg = N \wedge \Vr = S ) * P(\Mg = N) * P(\Vr = S) + {} \\
+        & P(\Zb = S \mid \Mg = N \wedge \Vr = N ) * P(\Mg = N) * P(\Vr = N) \\
+    = & 0.6*0.1*0.2 \ +\  0.5*0.1*0.8 \ +\  0.4*0.9*0.2 \ +\  0.01*0.9*0.8 \\
+    = & 0.1312.
+\end{align*}
+
+\begin{question}
+    Qual a probabilidade de se ver um zumbi quando estiver havendo um surto viral?
+\end{question}
+
+\begin{align*}
+    P (\Zb = S \mid \Vr = S) =
+        & P(\Zb = S \mid \Mg = S \wedge \Vr = S ) * P(\Mg = S) + {} \\
+        & P(\Zb = S \mid \Mg = N \wedge \Vr = S ) * P(\Mg = N) \\
+    = & 0.6*0.1 \ +\  0.4*0.9 \\
+    = & 0.42.
+\end{align*}
+
+\begin{question}
+    Qual a probabilidade de se ver um hipogrifo após ver um zumbi?
+\end{question}
+
+Primeiro, calcularemos a probabilidade de vermos zumbis
+após um feitiço mágico ser lançado,
+e também caso nenhum feitiço mágico seja lançado.
+
+\begin{align*}
+    P (\Zb = S \mid \Mg = S) =
+        & P(\Zb = S \mid \Mg = S \wedge \Vr = S ) * P(\Vr = S) + {} \\
+        & P(\Zb = S \mid \Mg = S \wedge \Vr = N ) * P(\Vr = N) \\
+    = & 0.6*0.2 \ +\  0.5*0.8 \\
+    = & 0.52; \\
+    P (\Zb = S \mid \Mg = N) =
+        & P(\Zb = S \mid \Mg = N \wedge \Vr = S ) * P(\Vr = S) + {} \\
+        & P(\Zb = S \mid \Mg = N \wedge \Vr = N ) * P(\Vr = N) \\
+    = & 0.4*0.2 \ +\  0.01*0.8 \\
+    = & 0.088.
+\end{align*}
+
+Agora, usando o princípio da independência condicional,
+podemos resolver o problema.
+
+\begin{align*}
+    P( \Hp = S \mid \Zb = S) =&
+        \Big( P( \Hp = S \wedge \Zb = S \wedge \Mg = S) + {} \\
+        & P( \Hp = S \wedge \Zb = S \wedge \Mg = N) \Big) / P(\Zb = S)\\
+        =& \Big( P(\Mg = S) * P(\Hp = S \mid \Mg = S) * P(\Zb = S \mid \Mg = S) \\
+         & P(\Mg = N) * P(\Hp = S \mid \Mg = N) * P(\Zb = S \mid \Mg = N) \Big) /
+           P(\Zb = S)\\
+        =& ( 0.1*0.8*0.52 \ +\  0.9*0.7*0.088 ) / 0.1312 \\
+        \approx & 0.739634146.
+\end{align*}
+
+\begin{question}
+    Qual a probabilidade de se ver um zumbi após ver um hipogrifo?
+\end{question}
+
+Primeiro, computaremos a probabilidade de se ver um hipogrifo;
+depois, é só utilizar o teorema de Bayes diretamente.
+
+\begin{align*}
+    P(\Hp = S) &= P(\Hp = S \mid \Mg = S) * P(\Mg = S) +
+        P(\Hp = S \mid \Mg = N) * P(\Mg = N) \\
+        &= 0.8*0.1 + 0.7*0.9 \\
+        &= 0.71 \\
+    P(\Zb = S \mid \Hp = S) &= \frac{P(\Hp = S \mid \Zb = S) * P(\Zb = S)}{P(\Hp = S)} \\
+        &\approx 0.739634146 * 0.1312 / 0.71\\
+        &\approx 0.136676056.
+\end{align*}
 
 \end{document}
